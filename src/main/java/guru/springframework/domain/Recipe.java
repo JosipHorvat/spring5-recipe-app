@@ -1,6 +1,7 @@
 package guru.springframework.domain;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 public class Recipe {
@@ -19,11 +20,22 @@ public class Recipe {
     //todo add
     //private Difficulity difficulity;
 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "recipe")
+    private Set<Ingridient> ingridient;
+
     @Lob
     private Byte[] image;
 
     @OneToOne(cascade = CascadeType.ALL)
     private Notes notes;
+
+    public Set<Ingridient> getIngridient() {
+        return ingridient;
+    }
+
+    public void setIngridient(Set<Ingridient> ingridient) {
+        this.ingridient = ingridient;
+    }
 
     public Long getId() {
         return id;
