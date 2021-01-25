@@ -19,7 +19,7 @@ public class Recipe {
     private String directions;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "recipe")
-    private Set<Ingridient> ingridient;
+    private Set<Ingridient> ingridients;
 
     @Lob
     private Byte[] image;
@@ -36,12 +36,12 @@ public class Recipe {
     private Set<Category> categories;
 
 
-    public Set<Ingridient> getIngridient() {
-        return ingridient;
+    public Set<Ingridient> getIngridients() {
+        return ingridients;
     }
 
-    public void setIngridient(Set<Ingridient> ingridient) {
-        this.ingridient = ingridient;
+    public void setIngridients(Set<Ingridient> ingridient) {
+        this.ingridients = ingridient;
     }
 
     public Long getId() {
