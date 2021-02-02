@@ -32,7 +32,7 @@ public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEven
     @Override
     @Transactional
     public void onApplicationEvent(ContextRefreshedEvent event) {
-     //  recipeRepository.saveAll(getRecipes());
+       recipeRepository.saveAll(getRecipes());
        log.debug("Loading Bootstrap data");
 
     }
@@ -143,6 +143,10 @@ public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEven
 
         guacRecipe.getCategories().add(americanCategory);
         guacRecipe.getCategories().add(mexicanCategory);
+
+        guacRecipe.setUrl("https://www.webjars.org/");
+        guacRecipe.setServings(5);
+        guacRecipe.setSource("Kuharica");
 
         //add to return list
         recipes.add(guacRecipe);
