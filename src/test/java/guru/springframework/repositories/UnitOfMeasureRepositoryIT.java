@@ -19,6 +19,8 @@ public class UnitOfMeasureRepositoryIT {
     @Autowired
     UnitOfMeasureRepository unitOfMeasureRepository;
 
+    //Ovaj Test padam
+
     @Before
     public void setUp() throws Exception {
     }
