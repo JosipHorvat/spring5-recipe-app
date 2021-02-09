@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8" xmlns:th="http://www.thymeleaf.org">
+    <meta charset="UTF-8"/>
     <title>Recipe Form</title>
 
     <!-- Latest compiled and minified CSS -->
@@ -17,32 +17,24 @@
             crossorigin="anonymous" th:src="@{/webjars/bootstrap/3.3.7-1/js/bootstrap.min.js}"></script>
 </head>
 <body>
-
-        <!--/*Container Edit recipe information POST  */-->
-
+<!--/*@thymesVar id="recipe" type="guru.springframework.domain.Recipe"*/-->
 <div class="container-fluid" style="margin-top: 20px">
     <div class="row">
         <div class="col-md-6 col-md-offset-3">
-            <form  th:object="${recipe}" th:action="@{/recipe/}"  method="post">
+            <form  th:object="${recipe}" th:action="@{/recipe/}" method="post">
                 <input type="hidden" th:field="*{id}"/>
                 <div class="pannel-group">
                     <div class="panel panel-primary">
                         <div class="panel-heading">
                             <h1 class="panel-title">Edit Recipe Information</h1>
                         </div>
-
-                        <!--/*  */-->
-                        <!--/*Recipe description  */-->
                         <div class="panel-body">
                             <div class="row">
-                                <div class="col-md-3 form-group" >
+                                <div class="col-md-3 form-group">
                                     <label>Recipe Description:</label>
                                     <input type="text" class="form-control" th:field="*{description}"/>
                                 </div>
                             </div>
-
-                            <!--/* Radio button */-->
-                            <!--/* Check Box  Category 1,2 */-->
                             <div class="row">
                                 <div class="col-md-3 form-group">
                                     <label>Categories:</label>
@@ -62,9 +54,6 @@
                                     </div>
                                 </div>
                             </div>
-
-
-                            <!--/* New row for preptime cooktime and diff */-->
                             <div class="row">
                                 <div class="col-md-3 form-group">
                                     <label>Prep Time:</label>
@@ -74,8 +63,6 @@
                                     <label>Cooktime:</label>
                                     <input type="text" class="form-control" th:field="*{cookTime}"/>
                                 </div>
-
-                                <!--/* select Difficulty from ENUM object*/-->
                                 <div class="col-md-3 form-group">
                                     <label>Difficulty:</label>
                                     <select class="form-control">
@@ -85,8 +72,6 @@
                                     </select>
                                 </div>
                             </div>
-
-                            <!--/* servings, source and url fields*/-->
                             <div class="row">
                                 <div class="col-md-3 form-group">
                                     <label>Servings:</label>
@@ -102,77 +87,63 @@
                                 </div>
                             </div>
                         </div>
-
-                        <!--/* INGREDIENTS panel*/-->
-                        <!--/* INGREDIENTS panel*/-->
-                        <!--/* INGREDIENTS panel*/-->
-                        <div class="panel panel-primary">
-                            <div class="panel-heading">
-                                <div class="row">
-                                    <div class="col-md-11 ">
-                                        <h1 class="panel-title">Ingredients</h1>
-                                    </div>
-                                    <div class="col-md-1">
-                                        <a class="btn btn-default" href="#" role="button">Edit</a>
-                                    </div>
+                    </div>
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <div class="row">
+                                <div class="col-md-11 ">
+                                    <h1 class="panel-title">Ingredients</h1>
+                                </div>
+                                <div class="col-md-1">
+                                    <a class="btn btn-default" href="#" th:href="@{'/recipe/' + ${recipe.id} + '/ingredients'}" role="button">View</a>
                                 </div>
                             </div>
-
-                            <div class="panel-body">
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <ul>
-                                            <li th:remove="all">1 Cup of milk</li>
-                                            <li th:remove="all">1 Teaspoon of chocolate</li>
-                                            <li th:each="ingredient : ${recipe.ingredients}"
-                                                th:text="${(ingredient.getAmount() +
+                        </div>
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <ul th:if="${not #lists.isEmpty(recipe.ingredients)}">
+                                        <li th:remove="all">1 Cup of milk</li>
+                                        <li th:remove="all">1 Teaspoon of chocolate</li>
+                                        <li th:remove="all">asdf</li>
+                                        <li th:each="ingredient : ${recipe.ingredients}"
+                                            th:text="${(ingredient.getAmount() +
                                         ' ' + ingredient.uom.getDescription() +
                                         ' - ' + ingredient.getDescription())}">1 Teaspoon of Sugar
-                                            </li>
-                                        </ul>
-                                    </div>
+                                        </li>
+                                    </ul>
                                 </div>
                             </div>
                         </div>
-                        <!--/* DIRECTIONS panel*/-->
-                        <!--/* DIRECTIONS panel*/-->
-                        <!--/* DIRECTIONS panel*/-->
-
-                        <div class="panel panel-primary">
-                            <div class="panel-heading">
-                                <h1 class="panel-title">Directions</h1>
-                            </div>
-                            <div class="panel-body">
-                                <div class="row">
-                                    <div class="col-md-12 form-group">
-                                        <textarea class="form-control" rows="3" th:field="*{directions}"></textarea></div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!--/* NOTES panel*/-->
-                        <!--/* NOTES panel*/-->
-                        <!--/* NOTES panel*/-->
-                        <div class="panel panel-primary">
-                            <div class="panel-heading">
-                                <h1 class="panel-title">Notes</h1>
-                            </div>
-                            <div class="panel-body">
-                                <div class="row">
-                                    <div class="col-md-12 form-group">
-                                        <textarea class="form-control" rows="3" th:field="*{notes.recipeNotes}"></textarea>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!--/* Submit button */-->
-                        <button type="submit" class="btn btn-primary">Submit</button>
                     </div>
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <h1 class="panel-title">Directions</h1>
+                        </div>
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-md-12 form-group">
+                                    <textarea class="form-control" rows="3" th:field="*{directions}"></textarea></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <h1 class="panel-title">Notes</h1>
+                        </div>
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-md-12 form-group">
+                                    <textarea class="form-control" rows="3" th:field="*{notes.recipeNotes}"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
             </form>
         </div>
     </div>
 </div>
-
 </body>
 </html>
