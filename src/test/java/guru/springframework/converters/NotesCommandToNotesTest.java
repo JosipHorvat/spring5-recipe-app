@@ -16,16 +16,16 @@ public class NotesCommandToNotesTest {
 
     @Before
     public void setUp() throws Exception {
-    converter = new NotesCommandToNotes();
+        converter = new NotesCommandToNotes();
     }
 
     @Test
-    public void testNullParametar() throws Exception{
+    public void testNullParametar() throws Exception {
         assertNull(converter.convert(null));
     }
 
     @Test
-    public void testEmptyObject() throws Exception{
+    public void testEmptyObject() throws Exception {
         assertNotNull(converter.convert(new NotesCommand()));
     }
 

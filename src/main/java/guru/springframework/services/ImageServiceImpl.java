@@ -11,7 +11,7 @@ import java.io.IOException;
 
 @Slf4j
 @Service
-public class ImageServiceImpl implements ImageService{
+public class ImageServiceImpl implements ImageService {
 
     private final RecipeRepository recipeRepository;
 
@@ -27,15 +27,15 @@ public class ImageServiceImpl implements ImageService{
             Recipe recipe = recipeRepository.findById(recipeId).get();
             Byte[] byteObjects = new Byte[file.getBytes().length];
 
-            int i =0;
+            int i = 0;
 
-            for (byte b : file.getBytes()){
-                byteObjects[i++] =b;
+            for (byte b : file.getBytes()) {
+                byteObjects[i++] = b;
             }
             recipe.setImage(byteObjects);
             recipeRepository.save(recipe);
 
-        }catch (IOException e){
+        } catch (IOException e) {
             //todo Need to be better handled
             log.error("Error occurred");
             e.printStackTrace();

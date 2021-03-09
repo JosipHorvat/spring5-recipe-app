@@ -27,7 +27,7 @@ public class IngredientController {
     }
 
     @GetMapping("recipe/{recipeId}/ingredients")
-    public String listIngredients(@PathVariable String recipeId, Model model){
+    public String listIngredients(@PathVariable String recipeId, Model model) {
 
         model.addAttribute("recipe", recipeService.findCommandById(Long.valueOf(recipeId)));
         return "recipe/ingredient/list";
@@ -35,13 +35,14 @@ public class IngredientController {
 
     @GetMapping("recipe/{recipeId}/ingredient/{id}/show")
     public String showRecipeIngredient(@PathVariable String recipeId,
-                                       @PathVariable String id, Model model){
+                                       @PathVariable String id, Model model) {
         model.addAttribute("ingredient", ingredientService.findRecipeIdAndIngredientId(Long.valueOf(recipeId), Long.valueOf(id)));
         return "recipe/ingredient/show";
     }
+
     @GetMapping("recipe/{recipeId}/ingredient/{id}/update")
     public String updateRecipeIngredient(@PathVariable String recipeId,
-                                         @PathVariable String id, Model model){
+                                         @PathVariable String id, Model model) {
         model.addAttribute("ingredient", ingredientService.findRecipeIdAndIngredientId(Long.valueOf(recipeId), Long.valueOf(id)));
 
         model.addAttribute("uomList", unitOfMeasureService.listAllUoms());
@@ -49,7 +50,7 @@ public class IngredientController {
     }
 
     @PostMapping("recipe/{recipeId}/ingredient")
-    public String saveOrUpdate(@ModelAttribute IngredientCommand command){
+    public String saveOrUpdate(@ModelAttribute IngredientCommand command) {
         IngredientCommand savedCommand = ingredientService.saveIngredientCommand(command);
 
         log.debug("saved receipe id:" + savedCommand.getRecipeId());
@@ -59,7 +60,7 @@ public class IngredientController {
     }
 
     @GetMapping("recipe/{recipeId}/ingredient/new")
-    public String newRecipe(@PathVariable String recipeId, Model model){
+    public String newRecipe(@PathVariable String recipeId, Model model) {
 
         RecipeCommand recipeCommand = recipeService.findCommandById(Long.valueOf(recipeId));
         //todo raise exception if null
@@ -76,7 +77,7 @@ public class IngredientController {
 
     @GetMapping("recipe/{recipeId}/ingredient/{id}/delete")
     public String deleteIngredient(@PathVariable String recipeId,
-                                   @PathVariable String id){
+                                   @PathVariable String id) {
 
         log.debug("deleting ingredient id:" + id);
         ingredientService.deleteById(Long.valueOf(recipeId), Long.valueOf(id));

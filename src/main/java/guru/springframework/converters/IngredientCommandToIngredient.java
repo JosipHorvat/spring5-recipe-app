@@ -15,13 +15,14 @@ public class IngredientCommandToIngredient implements Converter<IngredientComman
     public IngredientCommandToIngredient(UnitOfMeasureCommandToUnitOfMeasure uomConverter) {
         this.uomConverter = uomConverter;
     }
+
     //??
     @Synchronized
     @Nullable
     @Override
     public Ingredient convert(IngredientCommand source) {
 
-        if(source == null) {
+        if (source == null) {
             return null;
         }
         final Ingredient ingredient = new Ingredient();

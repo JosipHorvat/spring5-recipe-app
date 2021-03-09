@@ -39,7 +39,7 @@ public class IndexControllerTest {
     }
 
     @Test
-    public void restMockMVC() throws Exception{
+    public void restMockMVC() throws Exception {
         MockMvc mockMvc = MockMvcBuilders.standaloneSetup(indexController).build();
         mockMvc.perform(get("/"))
                 .andExpect(status().isOk())
@@ -47,7 +47,7 @@ public class IndexControllerTest {
     }
 
     @Test
-    public void getIndexPage() throws Exception{
+    public void getIndexPage() throws Exception {
 
         //given
         Set<Recipe> recipes = new HashSet<>();
